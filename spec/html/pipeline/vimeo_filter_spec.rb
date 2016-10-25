@@ -7,7 +7,7 @@ describe HTML::Pipeline::VimeoFilter do
 
   it "generates player iframe based on link" do
     expect(described_class.to_html(vimeo_url)).to eq(
-      %(<iframe src="//player.vimeo.com/video/137266757?title=0&byline=0&portrait=0" width="440" height="248" frameborder="0"></iframe>)
+      %(<div class='video vimeo'><iframe src="//player.vimeo.com/video/137266757?title=0&byline=0&portrait=0" width="440" height="248" frameborder="0"></iframe></div>)
     )
   end
 
@@ -21,13 +21,14 @@ describe HTML::Pipeline::VimeoFilter do
 
   it "does transform link wrapped in a <div>" do
     expect(described_class.to_html("<div>#{vimeo_url}</div>")).to eq(
-      %(<div><iframe src="//player.vimeo.com/video/137266757?title=0&byline=0&portrait=0" width="440" height="248" frameborder="0"></iframe></div>)
+      %(<div><div class='video vimeo'><iframe src="//player.vimeo.com/video/137266757?title=0&byline=0&portrait=0" width="440" height="248" frameborder="0"></iframe></div></div>)
     )
   end
 
   it "does transform link after <br>" do
     expect(described_class.to_html("<br>#{vimeo_url}")).to eq(
-      %(<br><iframe src="//player.vimeo.com/video/137266757?title=0&byline=0&portrait=0" width="440" height="248" frameborder="0"></iframe>)
+      %(<br><div class='video vimeo'><iframe src="//player.vimeo.com/video/137266757?title=0&byline=0&portrait=0" width="440" height="248" frameborder="0"></iframe></div>)
     )
   end
+
 end
